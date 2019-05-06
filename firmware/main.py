@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # # This file is part of MicroPython M5Stack package
 # Copyright (c) 2017-2018 Mika Tuupola
@@ -9,14 +10,14 @@
 #   https://github.com/tuupola/micropython-m5stack
 #
 
-#pylint: disable=import-error
+# pylint: disable=import-error
 from machine import I2C, Pin, SPI, Timer
 from input import DigitalInput
 from ip5306 import IP5306
 from micropython import const
 import display
 import m5stack
-#pylint: enable=import-error
+# pylint: enable=import-error
 
 BUTTON_Y = const(181)
 
@@ -41,7 +42,7 @@ i2c = I2C(scl=Pin(22), sda=Pin(21))
 # 0x68 = MPU6500
 # 0x75 = IP5306
 devices = map(hex, i2c.scan())
-print("I2C devices found:", end=" ")
+print("I2C devices found: ")
 print(", ".join(devices))
 
 battery = IP5306(i2c)

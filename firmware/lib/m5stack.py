@@ -80,7 +80,7 @@ class Display(object):
     def create(self):
         tft = display.TFT()
         tft.init(
-            tft.ILI9341,
+            tft.ILI9341, # NOTE: 2019.05.06, 23:54 -- Got error: AttributeError: 'TFT' object has no attribute 'ILI9341'
             spihost=tft.HSPI,
             width=320,
             height=240,

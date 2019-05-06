@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := help
-PORT := /dev/tty.SLAB_USBtoUART
+# PORT := /dev/tty.SLAB_USBtoUART
+PORT := COM4
 
 help:
 	@echo ""
@@ -16,16 +17,17 @@ watch:
 	find . -name "*.py" | entr -c sh -c 'make sync && make reset'
 
 sync:
-	rshell --port $(PORT) --timing --buffer-size=32 rsync --mirror --verbose ./firmware /flash
+	rshell -p $(PORT) --timing --buffer-size=32 rsync --mirror ./firmware /flash
+	# rshell --port $(PORT) --timing --buffer-size=32 rsync --mirror --verbose ./firmware /flash
 
 shell:
-	rshell --port $(PORT) --timing --buffer-size=32
+	rshell -p $(PORT) --timing --buffer-size=32
 
 repl:
 	screen $(PORT) 115200
 
 reset:
-	rshell --port $(PORT) --timing --buffer-size=32 repl "~ import machine ~ machine.reset()~"
+	rshell -p $(PORT) --timing --buffer-size=32 repl "~ import machine ~ machine.reset()~"
 
 deps:
 	@echo "Nothing to install..."
